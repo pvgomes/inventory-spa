@@ -7,6 +7,7 @@
 
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
+                <li><a href="#">Dashboard</a></li>
                 <li><a href="#">Computadores</a></li>
                 <li><a href="#">Outros</a></li>
             </ul>
@@ -17,21 +18,17 @@
 </nav>
 
 <div class="container">
+  
+
+  <div class="row">
+      <app-cockpit (itemCreated)="onItemCreated($event)"></app-cockpit>
+  </div>
+  <hr>
   <div class="row">
     <div class="col-md-12">
-        <a
-        href="#" class="list-group-item clearfix"
-        *ngFor="let item of items">
-            <div class="pull-left">
-                <h4 class="list-group-item-heading"> {{ item.name }}</h4>
-                <p class="list-group-item-text"> {{ item.description }}</p>
-                <p class="list-group-item-text">Patrimônio: {{ item.code }}</p>
-
-            </div>
-            <span class="pull-right">
-
-            </span>
-        </a>
+        <app-item
+        *ngFor="let item of items"
+        [element]="item"></app-item>
     </div>
   </div>
 </div>
