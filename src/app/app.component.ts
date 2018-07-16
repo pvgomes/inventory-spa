@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
+import { Response } from '@angular/http';
 import { Item } from './item.model';
+import { ComputersService } from './computers/computers.service';
+
 
 @Component({
   selector: 'app-root',
@@ -7,6 +10,13 @@ import { Item } from './item.model';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
+  // public items;
+  //
+  constructor(private computersService: ComputersService) {
+      //this.items = this.computersService.getComputers();
+  }
+
   // public items: Item[] = [
   //     new Item('MacBook Pro', 'Macbook por retina', 1073),
   //     new Item('Dell', 'core i7 por retina', 1074)
@@ -19,5 +29,25 @@ export class AppComponent {
 
   onItemCreated(itemData: {name: string, description: string, code: number}) {
       this.items.push(itemData);
+  }
+
+  onSave() {
+      this.computersService.storeComputers(this.items)
+        .subscribe(
+            (response) => console.log(response),
+            (error) => console.log(error)
+        );
+  }
+
+
+  onGet() {
+      this.computersService.getComputers()
+      .subscribe(
+          (response: Response) => {
+              const data = response.json();
+              console.log(data);
+          },
+          (error) => console.log(error)
+      );
   }
 }
