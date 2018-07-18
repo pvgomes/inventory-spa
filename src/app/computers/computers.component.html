@@ -1,0 +1,13 @@
+<div class="row align-items-center">
+    <div class="col align-self-center">
+        <app-cockpit (itemCreated)="onItemCreated($event)"></app-cockpit>
+    </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-12">
+      <app-item
+      *ngFor="let item of items"
+      [element]="item"></app-item>
+  </div>
+</div>
